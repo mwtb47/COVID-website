@@ -4,3 +4,4 @@ __pycache__
 /data
 covid_website.py
 .ipynb_checkpoints
+*.ipynb
