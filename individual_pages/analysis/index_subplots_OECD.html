@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Bivariate OLS</title>
+  </head>
+
+  <!-- Styles-->
+  <style>
+  html, body {
+    margin:0;
+    padding:0;
+  }
+  .aligncenter {
+      text-align: center;
+  }
+  p.a {
+    margin-left: 8%;
+    margin-right: 8%;
+    font-family: Arial;
+    font-size: 18px;
+    color: rgb(60,60,60)
+  }
+  .header {
+    padding: 20px;
+    text-align: center;
+    background: rgb(0,153,153);
+    color: white;
+    font-family: Arial;
+    font-size: 30px;
+  }
+  .header_buttons {
+    text-align: center;
+    background: rgb(0,153,153);
+    color: white;
+    font-family: Arial;
+    font-size: 16px;
+  }
+  .header_buttons_2 {
+    padding: 10px;
+    text-align: center;
+    background: rgb(0,153,153);
+    color: white;
+    font-family: Arial;
+    font-size: 16px;
+  }
+  .header_2 {
+    padding: 15px 0px 2px 0px;
+    text-align: center;
+    background: rgb(210,240,240);
+    color: rgb(50,60,60);
+    font-family: Arial;
+    font-size: 30px;
+  }
+  .header_date {
+    padding: 0px 0px 15px 0px;
+    text-align: center;
+    background: rgb(210,240,240);
+    color: rgb(50,60,60);
+    font-family: Arial;
+    font-size: 14px;
+  }
+  .hyperlink{
+    color: white;
+    font-family: Arial;
+    text-decoration: none;
+  }
+  .footer{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 7px;
+    text-align: center;
+    background: rgb(0,153,153);
+    color: white;
+    font-family: Arial;
+    font-size: 15px;
+  }
+
+  hr {
+    width: 90%;
+    height: 1px;
+    background-color: rgb(200,200,200);
+  }
+
+  .dropbtn {
+    background-color: rgb(0,153,153);
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+  }
+  .dropdown {
+    font-size: 16px;
+    position: relative;
+    background-color: rgb(0,153,153);
+    display: inline-block;
+  }
+  .dropdown-content {
+    text-align: left;
+    display: none;
+    position: absolute;
+    background-color: rgb(240,240,240);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    background-color: rgb(245,245,245);
+    color: rgb(0,153,153);
+    padding: 12px 16px;
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown-content a:hover {background-color: rgba(220,220,220,0.9);}
+  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown:hover .dropbtn {background-color: rgb(0,153,153);}
+  </style>
+
+
+  <!-- Document-->
+
+  <script>
+  n =  new Date(document.lastModified);
+  y = n.getFullYear();
+  m = n.getMonth() + 1;
+  d = n.getDate();
+  </script>
+
+  <div class="header_buttons">
+    <div class="dropdown">
+      <button class="dropbtn"><a href="/COVID-website/index.html" class=hyperlink>Home</a></button>
+    </div>
+
+    &emsp;
+
+    <div class="dropdown">
+      <button class="dropbtn"><a>Cases</a></button>
+      <div class="dropdown-content">
+        <a href="/COVID-website/individual_pages/cases/index_daily_cases.html" class=hyperlink>Daily Cases</a>
+        <a href="/COVID-website/individual_pages/cases/index_total_cases.html" class=hyperlink>Total Cases</a>
+        <a href="/COVID-website/individual_pages/cases/index_cases_by_region.html" class=hyperlink>Cases by Region</a>
+      </div>
+    </div>
+
+    &emsp;
+
+    <div class="dropdown">
+      <button class="dropbtn"><a>Deaths</a></button>
+      <div class="dropdown-content">
+        <a href="/COVID-website/individual_pages/deaths/index_daily_deaths.html" class=hyperlink>Daily Deaths</a>
+        <a href="/COVID-website/individual_pages/deaths/index_total_deaths.html" class=hyperlink>Total Deaths</a>
+        <a href="/COVID-website/individual_pages/deaths/index_deaths_by_region.html" class=hyperlink>Deaths by Region</a>
+        <a href="/COVID-website/individual_pages/deaths/index_excess_deaths.html" class=hyperlink>Excess Deaths</a>
+      </div>
+    </div>
+
+    &emsp;
+
+    <div class="dropdown">
+      <button class="dropbtn"><a>Vaccination</a></button>
+      <div class="dropdown-content">
+        <a href="/COVID-website/individual_pages/vaccines/index_vaccinations.html" class=hyperlink>Vaccination</a>
+      </div>
+    </div>
+
+    &emsp;
+
+    <div class="dropdown">
+      <button class="dropbtn"><a>Maps</a></button>
+      <div class="dropdown-content">
+        <a href="/COVID-website/individual_pages/maps/index_total_deaths.html" class=hyperlink>World</a>
+        <a href="/COVID-website/individual_pages/maps/index_usa.html" class=hyperlink>USA</a>
+      </div>
+    </div>
+
+    &emsp;
+
+    <div class="dropdown">
+      <button class="dropbtn"><a>Summary Tables</a></button>
+      <div class="dropdown-content">
+        <a href="/COVID-website/individual_pages/summary_tables/index_cases.html" class=hyperlink>Cases</a>
+        <a href="/COVID-website/individual_pages/summary_tables/index_deaths.html" class=hyperlink>Deaths</a>
+        <a href="/COVID-website/individual_pages/summary_tables/index_cfr.html" class=hyperlink>Case Fatality Rate</a>
+      </div>
+    </div>
+
+    &emsp;
+
+    <div class="dropdown">
+      <button class="dropbtn"><a>Analysis</a></button>
+      <div class="dropdown-content">
+        <a href="/COVID-website/individual_pages/analysis/index_subplots_world.html" class=hyperlink>Bivariate OLS</a>
+        <a href="/COVID-website/individual_pages/analysis/index_subplots_OECD.html" class=hyperlink>Multivariate OLS</a>
+      </div>
+    </div>
+
+    &emsp;
+
+    <div class="dropdown">
+      <button class="dropbtn"><a>Other Data</a></button>
+      <div class="dropdown-content">
+        <a href="https://mwtb47.github.io/Sweden-COVID-website/" class=hyperlink>Sweden</a>
+        <a href="https://mwtb47.github.io/UK-COVID-website/" class=hyperlink>United Kingdom</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="header_2">
+    <a>Bivariate Relationships</a>
+    <br>
+    <a style="font-size:20px">OECD</a>
+  </div>
+
+  <div class="header_date">
+    <i style="font-size:15px">Updated <script>document.write(y + "/" + m + "/" + d);</script></i>
+  </div>
+
+
+  <div class="header_buttons_2">
+    <a href="/COVID-website/individual_pages/analysis/index_subplots_world.html" class=hyperlink>World</a>
+    &emsp;
+    <a href="/COVID-website/individual_pages/analysis/index_subplots_OECD.html" class=hyperlink>OECD</a>
+  </div>
+
+  <br>
+
+  <p class="a">
+    The following graphs show the relationships between a selection of metrics
+    and the number of COVID-19 deaths per million. For each metric, all OECD
+    countries are included for which data are available. Each plot includes an
+    OLS regression line, along with its formula and <i>R</i><sup>2</sup> value.
+    A description of the metrics and their sources can be found below the
+    graphs. Deaths statistics are from
+    <a style="color:rgb(70,70,150)" href="https://github.com/CSSEGISandData/COVID-19">JHU CSSE COVID-19 Data</a>.
+  </p>
+
+  <br>
+
+  <div class="aligncenter">
+      <embed type="text/html" src="/COVID-website/graphs/analysis/subplots_oecd.html" width="90%" height="1200">
+  </div>
+
+  <br>
+
+  <table style="width:75%; margin-left:auto; margin-right:auto;">
+    <colgroup>
+       <col span="1" style="width: 20%;">
+       <col span="1" style="width: 60%;">
+       <col span="1" style="width: 20%;">
+    </colgroup>
+    <tr>
+      <th>Metric</th>
+      <th>Description</th>
+      <th>Source</th>
+    </tr>
+    <tr>
+      <td>% Overweight</td>
+      <td>The percentage of adults aged 18 years or over in a country with a
+        BMI of over 25.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://apps.who.int/gho/data/view.main.GLOBAL2461A?lang=en">World Health Organization</a></td>
+    </tr>
+    <tr>
+      <td>Median Age</td>
+      <td>Median age of the country's population.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://www.cia.gov/the-world-factbook/field/median-age/country-comparison">The World Factbook - CIA</a></td>
+    </tr>
+    <tr>
+      <td>% Single Household</td>
+      <td>The percentage of households with a single resident.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://population.un.org/Household/">United Nations</a></td>
+    </tr>
+    <tr>
+      <td>People per House</td>
+      <td>The mean number of usual residents per household.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://population.un.org/Household/">United Nations</a></td>
+    </tr>
+    <tr>
+      <td>% Living in Urban Area</td>
+      <td>The percentage of the population living in urban areas.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://data.worldbank.org/indicator/SP.URB.TOTL.IN.ZS">The World Bank</a></td>
+    </tr>
+    <tr>
+      <td>Average Annual Cigarettes per Person</td>
+      <td>The mean number of legally sold cigarettes smoked per person aged
+         15 or over per year.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://tobaccoatlas.org/topic/consumption/">Tobacco Atlas</a></td>
+    </tr>
+    <tr>
+      <td>Democracy Score</td>
+      <td>Value representing the state of democracy in a country, ranging from
+        0, most authoritarian, to 10, most democratic.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://www.eiu.com/n/campaigns/democracy-index-2020/">The Economist Intelligence Unit</a></td>
+    </tr>
+    <tr>
+      <td>Healthcare as % of GDP</td>
+      <td>Total expenditure on healthcare as a percentage of GDP. Note this is
+        both private and public expenditure.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://data.worldbank.org/indicator/SH.XPD.CHEX.GD.ZS">The World Bank</a></td>
+    </tr>
+    <tr>
+      <td>PM2.5</td>
+      <td>Mean annual exposure to PM2.5 air pollution particles.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://data.worldbank.org/indicator/EN.ATM.PM25.MC.M3">The World Bank</a></td>
+    </tr>
+    <tr>
+      <td>Gini Coefficient</td>
+      <td>The Gini coefficient is a measure of income inequality in a country.
+        The higher the number the, the higher the level of income inequality.
+      </td>
+      <td><a style="color:rgb(70,70,150)" href="https://data.worldbank.org/indicator/SI.POV.GINI">The World Bank</a></td>
+    </tr>
+    <tr>
+      <td>Political Trust</td>
+      <td>Public trust in politicians on a scale 1-7, where 1 is the lowest
+        level of trust and 7 is the highest.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://tcdata360.worldbank.org/indicators/hbb8873f1?country=BRA&indicator=665&viz=line_chart&years=2007,2017">The World Bank</a></td>
+    </tr>
+    <tr>
+      <td>GHS Overall Score</td>
+      <td>Combined measure of a country's ability to prevent, detect and
+        respond to emerging pathogens. It also includes the robustness of the
+        health service, committment to international norms of health practice,
+        and the country's vulnerability to biological threats. A more detailed
+        description of the index can be found on their website.</td>
+      <td><a style="color:rgb(70,70,150)" href="https://www.ghsindex.org">Global Health Security Index</a></td>
+    </tr>
+  </table>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <div class="footer">
+    <a>Contact: mwt.barnes@outlook.com</a>
+  </div>
+
+</html>
