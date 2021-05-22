@@ -23,6 +23,13 @@
     font-size: 18px;
     color: rgb(60,60,60)
   }
+  ul.a {
+    margin-left: 8%;
+    margin-right: 8%;
+    font-family: Arial;
+    font-size: 18px;
+    color: rgb(60,60,60)
+  }
   .header {
     padding: 20px;
     text-align: center;
@@ -237,7 +244,35 @@
   <br>
 
   <p class="a">
-    Text description.
+    The following simulations are based on a simple model of infection, one that
+    does not necessary represent the behaviour of the Coronavirus. The model is
+    set up as such:
+    <ul class="a">
+      <li>Immune individuals cannot become infected or transmit the virus.</li>
+      <li>Infected individuals only have one opportunity to infect surrounding
+        individuals. </li>
+      <li>For an individual with position (x,y), the surrounding individuals are
+        defined as those in the Cartesian product of the two sets {x-1, x, x+1} and
+        {y-1, y, y+1}, excluding (x,y) and any coordinate outside of the grid.</li>
+      <li>Individuals can only become infected once.</li>
+      <li>Successfully vaccinated individuals have the same characteristics as
+        immune individuals, unsuccessfully vaccinated individuals have the same
+        charateristics as non-immune individuals.
+      <li>The distribution of immune and non-immune individuals is random, as
+        is the location of the individuals starting the simulation infected.</li>
+      <li>The simulation ends when there are no more newly infected individuals. </li>
+    </ul>
+  </p>
+  <p class="a">
+    The simulations below have the following parameters:
+    <ul class="a">
+      <li>10% of individuals are naturally immune.</li>
+      <li>Vaccine efficacy is 90%.</li>
+      <li>20%, 40%, 60%, and 80% of individuals are vaccinated, meaning an
+        additional 0.9 times that number are immune.</li>
+      <li>The probability of an infected individual infecting a surrounding,
+        non-immune, individual is 0.85.</li>
+    </ul>
   </p>
 
   <br>
@@ -251,8 +286,6 @@
     </div>
   </div>
 
-  <hr>
-
   <div class="row">
     <div class="column">
       <img src="/COVID-website/model/simulation_60.gif" alt="Model Simulation" width="80%" height="auto">
@@ -264,8 +297,26 @@
 
   <hr>
 
+  <p class="a">
+    The results in the above simulations can vary for any given level of immunity
+    due to the random distribution of the infected and immune individuals, and
+    the random nature of the infection. The following graphs summarise 1,000
+    simulations at each vaccination level using the same parameters as above and
+    provide a couple of key insights:
+    <ul class="a">
+      <li>The mean number of infections for each vaccination level falls as
+        the proportion of vaccinated individuals increases. </li>
+      <li>  The variation in the number of infections is greatest when the level
+        of immunity – a combination of natural and vaccine-induced – is around 50%.
+        The variation decreases as the level of immunity approaches both 0% and 100%.
+        This random variation in infection levels can be a factor in explaining the
+        differing levels of infection seen in countries were other factors
+        associated with virus outbreak outcomes are similar. </li>
+    </ul>
+  </p>
+
   <div class="aligncenter">
-      <embed type="text/html" src="/COVID-website/model/simulation_results.html" width="90%" height="800">
+      <embed type="text/html" src="/COVID-website/model/simulation_results.html" width="90%" height="850">
   </div>
 
 
